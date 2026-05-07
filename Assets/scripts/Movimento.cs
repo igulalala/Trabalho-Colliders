@@ -14,7 +14,6 @@ public class script : MonoBehaviour
     {
         myRigidbody2D = GetComponent<Rigidbody2D>();
         movimentoSpeed = 10;
-
         facingRight = true;
     }
 
@@ -22,20 +21,20 @@ public class script : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxis("horizontal");
-        //Debug.Log(horizontal);
-        HandMovimento(horizontal);
+        
     }
 
     void FixedUpdate()
     {
         HandMovimento(horizontal);
+
         Flip(horizontal);
     }
 
     void HandMovimento(float horizontal)
     {
         myRigidbody2D.linearVelocity = new Vector2(horizontal * movimentoSpeed, myRigidbody2D.linearVelocity.y);
-        Debug.Log(horizontal);
+       //Debug.Log(horizontal);
     }
 
     void Flip(float horizontal)
@@ -50,5 +49,26 @@ public class script : MonoBehaviour
             transform.localScale = theScale;
             Debug.Log("o personagem virou");
         }
+    }
+    void OnCollisionEnter2D(Collision2D colisao)
+    {
+       // Debug.Log("Colidiu com o objeto ");
+       if(colisao.gameObject.tag == "Objeto")
+        {
+            Debug.Log("Colidiu com o objeto " + colisao.gameObject.name);
+        }
+    }
+
+    void OnCollisionExit2D()
+    {
+        Debug.Log("Saiu da colisão com o objeto");
+    }
+    private void OnCollisionStay2D(Collision2D colisao)
+    {
+        Debug.Log("Player continua colidindo com objeto");
+    }
+    void OnTriggerEnter2D(Collider2D colisao)
+    {
+        Debug.Log("Colidiu com o objeto TRIGGER");
     }
 }
