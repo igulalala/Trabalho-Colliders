@@ -69,6 +69,19 @@ public class script : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D colisao)
     {
-        Debug.Log("Colidiu com o objeto TRIGGER");
+        //Debug.Log("Colidiu com o objeto TRIGGER");
+        if (colisao.gameObject.tag == "Objeto")
+        {
+            Destroy(colisao.gameObject);
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("Deixou de colidir com objeto TRIGGER");
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("Continua colidindo com objeto TRIGGER");
     }
 }
+
